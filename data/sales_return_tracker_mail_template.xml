@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Email template -->
+         <record id="sales_return_tracker_template" model="mail.template">
+            <field name="name">Sale Return Email</field>
+            <field name="model_id" ref="dsl_sales_return.model_sales_return"/>
+            <field name="email_from">${object.user_id.partner_id.email |safe}</field>
+            <field name="email_to">${object.partner_id.email |safe}</field>
+            <field name="subject">Ref ${object.name or 'n/a'}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+                <p>Dear ${object.partner_id.name},</p>
+                <p>Your service tracker code ${object.access_code or 'n/a'} (${object.sale_order_line_id.product_id.name  or 'n/a'}) with reference no <b>${object.name or 'n/a'}</b> has been processed to <b>${object.state or 'n/a'}</b> stage.</p>
+                <p>If you have any questions, please let us know.</p>
+                <br/>
+                <div>
+                    <btn><a href="/service/tracker?access_code=${object.access_code}" style="background-color: #5b7e82; margin-left: 5px; margin-bottom: 10ox; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff !important; border-radius: 5px; font-size:13px;">View Details</a></btn>
+                </div>
+                <br/>
+                <p>Best regards,</p>]]>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

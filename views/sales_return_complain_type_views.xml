@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <!-- Tree View -->
+        <record id="sales_return_complain_type_tree_view" model="ir.ui.view">
+            <field name="name">sales.return.complain.type.tree.view</field>
+            <field name="model">sales.return.complain.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="complain_type"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="sales_return_complain_type_form_view" model="ir.ui.view">
+            <field name="name">sales.return.complain.type.form.view</field>
+            <field name="model">sales.return.complain.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="complain_type" />
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action View-->
+        <record id="action_sales_return_complain_type_view" model="ir.actions.act_window">
+            <field name="name">Sales Return Complain Type</field>
+            <field name="res_model">sales.return.complain.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sales_return_complain_type_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to Create a New Record.
+                </p>
+            </field>
+        </record>
+    
+    </data>
+</odoo>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="action_sales_return_stock_valuation_report"
+        model="service.stock.valuation.report"
+        string="Valuation Report"
+        report_type="qweb-pdf"
+        name="dsl_service_shop.sales_return_stock_valuation_report"
+        file="dsl_service_shop.sales_return_stock_valuation_report"
+    />
+    <template id="sales_return_stock_valuation_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div style="text-align: center; margin-bottom: 20px">
+                        <h2> Inventory Valuation Report </h2>
+                        <div class="card" style="width: 20rem; margin: 0 auto;">
+                            <ul class="list-group list-group-flush">
+                                <li t-if="date" class="list-group-item" style="width:20 px">Date:
+                                    <t t-esc="date"/>
+                                </li>
+                                <t t-if="product">
+                                    <li class="list-group-item">Product:
+                                        <t t-esc="product"/>
+                                    </li>
+                                </t>
+                                <t t-if="product_category">
+                                    <li class="list-group-item">Product Category:
+                                        <t t-esc="product_category"/>
+                                    </li>
+                                </t>
+                                <t t-if="is_a_parts">
+                                    <li class="list-group-item">Parts:
+                                        <!-- <t t-esc="is_a_parts"/> -->
+                                    </li>
+                                </t>
+                                <t t-if="brand">
+                                    <li class="list-group-item">
+                                        Brand:
+                                        <t t-esc="brand"/>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+                    <table class="table table-sm" style="font-size: small;">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-left">Product</th>
+                                <th scope="col" class="text-left">Brand</th>
+                                <th scope="col" class="text-right">Quantity</th>
+                                <th scope="col" class="text-right">Unit Price</th>
+                                <th scope="col" class="text-right">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="total_qy" t-value="0"/>
+                            <t t-set="total_value" t-value="0"/>
+                            <t t-foreach="valuation_line" t-as="o">
+                                <tr t-if="o[1] > 0">
+                                    <td class="text-left">
+                                        <t t-esc="o[0]" />
+                                    </td>
+                                    <td class="text-left">
+                                        <t t-esc="o[3]" />
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="o[1]" />
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-if="o[1]>0" t-esc="'%0.2f' % round(o[2]/o[1],2)"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="'%0.2f' % round(o[2],2)" />
+                                    </td>
+                                </tr>
+                                <t t-set="total_qy" t-value="total_qy + o[1]"/>
+                                <t t-set="total_value" t-value="total_value + round(o[2],2)"/>
+                            </t>
+                            <tr>
+                                <td>
+                                    <b>Total</b>
+                                </td>
+                                <td></td>
+                                <td class="ml-5 text-right">
+                                    <b>
+                                        <t t-esc="total_qy"/>
+                                    </b>
+                                </td>
+                                <td></td>
+                                <td class="ml-5 text-right">
+                                    <b>
+                                        <t t-esc="'%0.2f' % round(total_value,2)"/>
+                                    </b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

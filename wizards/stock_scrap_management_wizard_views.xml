@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View -->
+        <record id="stock_scrap_management_wizard_form_view" model="ir.ui.view">
+            <field name="name">stock_scrap.management.wizard.form.view</field>
+            <field name="model">stock.scrap.management</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Scrap/Damage Management">
+                    <header>
+                        <field name="is_expense_entries" invisible="1"/>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight" attrs="{'invisible': [('status', 'not in', 'draft')]}"/>
+                        <button name="action_approve" type="object" string="Approve" class="oe_highlight" attrs="{'invisible': [('status', 'not in', 'confirmed')]}"/>
+                        <!-- <button name="action_scrap_sale" type="object" string="Srap Sale" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'done')]}"/> -->
+                        <!-- <button name="wizard_product_scrap_sale_open" type="object" string="Srap Sale" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'done')]}"/> -->
+                        <!-- <button name="action_validatation" type="object" string="Validate" class="oe_highlight" attrs="{'invisible': [('status', 'not in', 'approved')]}"/> -->
+                        <button name="action_expense_entries" type="object" string="Expense Entries" class="oe_highlight" state="approved" attrs="{'invisible': ['|', ('is_expense_entries', '!=', False), ('status', 'not in', 'approved')]}"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name='action_view_expense_entries' class="oe_stat_button" type="object" icon="fa-trash">
+                                <field string="Stock Scrap Management" name="expense_count" widget="statinfo"/>
+                            </button>
+                                     <!-- attrs="{'invisible':[('journal_entry_id','=', False)]}" -->
+                        </div>
+                        <group>
+                            <group>
+                                <field name="reference" attrs="{'readonly': [('status', '=', 'confirmed')]}"/>    
+                                <field name="responsible_id" attrs="{'readonly': [('status', '=', 'confirmed')]}"/>
+                                <field name="approver_id" attrs="{'readonly': [('status', '=', 'confirmed')]}"/>
+                            </group>
+                            <group>
+                                <field name="company_id" attrs="{'readonly': [('status', '=', 'confirmed')]}"/>
+                                <field name="date" attrs="{'readonly': [('status', '=', 'confirmed')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Items">
+                                <field name="item_lines_ids" attrs="{'readonly': [('status', '=', 'confirmed')]}">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="lot_id"/>
+                                        <field name="scrap_qty"/>
+                                        <field name="state" invisible="1"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="product_uom_id" invisible="1"/>
+                                        <field name="product_uom_category_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Action -->
+        <record id="action_stock_scrap_management_wizard_view" model="ir.actions.act_window">
+            <field name="name">Scrap/Damage Management</field>
+            <field name="res_model">stock.scrap.management</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('stock_scrap_management_wizard_form_view')})]"/>
+            <!-- <field name="view_id" ref="stock_scrap_management_wizard_form_view"/> -->
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="sales_return_state_product_recive" model="sales.return.stage">
+        <field name="name">Product Recive</field>
+        <field name="sequence">6</field>
+    </record>
+
+    <record id="sales_return_state_wirehouse_transfer" model="sales.return.stage">
+        <field name="name">Wirehouse Transfer</field>
+        <field name="sequence">9</field>
+    </record>
+
+    <record id="sales_return_state_ready_2_deliver" model="sales.return.stage">
+        <field name="name">Ready to Deliver</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="sales_return_state_shipped" model="sales.return.stage">
+        <field name="name">Shipped</field>
+        <field name="sequence">12</field>
+    </record>
+
+    <record id="sales_return_state_damage" model="sales.return.stage">
+        <field name="name">Damage/Scrap</field>
+        <field name="sequence">14</field>
+    </record>
+
+    
+</odoo>

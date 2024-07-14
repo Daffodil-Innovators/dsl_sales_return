@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>    
+        
+        <!-- Tree view --> 
+        <record id="sales_return_expense_entries_tree_view" model="ir.ui.view">
+            <field name="name">sales.return.expense.entries.tree</field>
+            <field name="model">sales.return.expense.entries</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="memo" />
+                    <field name="entry_date" />
+                    <field name="employee_id"/>
+                    <field name='expense_journal'/>
+                    <field name="expense_account" />
+                    <field name="payment_journal" />
+                    <field name="amount" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+ 
+
+        <!-- Form view -->
+        <record id="sales_return_expense_entries_form_view" model="ir.ui.view">
+            <field name="name">sales.return.expense.entries.form</field>
+            <field name="model">sales.return.expense.entries</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Validate" name="action_validate_adjustment" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('is_validate', '!=', False), ('state', 'not in', 'approved')]}"/>
+                        <!-- <button string="Approve" type="object" name="approve_expense_external_entries" class="oe_highlight" attrs="{'invisible': [('approval_status', '=', 'pending')]}"/>  
+                        <button string="Post" type="object" name="validate_sales_return_entries" class="oe_highlight" states="approved"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,request,approved,done"/> -->
+
+                
+                        <!-- <button string="Request Approval" type="object" name="request_approval_expense_entries" class="oe_highlight" attrs="{'invisible':[('state','!=','new')]}"/>
+                        <button string="Approve" type="object" name="approve_expense_entries" class="oe_highlight" attrs="{'invisible':[('state','!=','request')]}" groups="dsl_external_entries.group_expense_approver_user_1st"/>
+                        <button string="Approve" type="object" name="approve_expense_entries" class="oe_highlight" attrs="{'invisible':[('state','!=','2nd')]}" groups="dsl_external_entries.group_expense_approver_user_2nd"/>
+                        <button string="Approve" type="object" name="approve_expense_entries" class="oe_highlight" attrs="{'invisible':[('state','!=','3rd')]}" groups="dsl_external_entries.group_expense_approver_user_3rd"/>
+                        <button string="Post" type="object" name="validate_expense_entries" class="oe_highlight" attrs="{'invisible':[('state','!=','approved')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,request,2nd,3rd,approved,done"/> -->
+                        <field name="state" invisible="1"/>
+                        <field name="is_validate" invisible="1"/>
+                    </header>
+                    <sheet string="Sales Return Expense Entries">
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_journal_entries"
+                                    string="Journal Entries" type="object"
+                                    attrs="{'invisible':[('journal_entry_id','=', False)]}" icon="fa-bars"/>
+                        </div>
+                        <h3><b>Sales Return Expense Entries</b></h3>
+                        <group>
+                            <field name="is_approved" invisible='1'/>
+                            <field name="is_payment_bank" invisible='1'/>
+                            <field name="journal_entry_id" invisible='1'/>
+                            <group>
+                                <field name="expense_account" domain="[('company_id','=',company_id),('user_type_id.name','=','Expenses')]"/>
+                                <field name="payment_journal" domain="[('company_id','=',company_id),('type','in',['bank','cash'])]"/>
+                                <field name="cheque" attrs="{'invisible':[('is_payment_bank','=',False)]}"/>
+                                <field name="cheque_date" attrs="{'invisible':[('is_payment_bank','=',False)]}"/>
+                                <field name="bank" attrs="{'invisible':[('is_payment_bank','=',False)]}"/>
+                                <field name="amount" />
+                            </group>
+                            <group>
+                                <field name="branch_id"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name='expense_journal' domain="[('company_id','=',company_id)]"/>
+                                <field name="memo" />
+                                <field name="entry_date" />
+                            </group>
+                        </group>
+                        <field name="product_adj_line_ids" colspan="2">
+                            <tree editable="bottom">
+                                <field name='product_id'/>
+                                <field name='prod_lot_id' domain="[('product_id','=',product_id)]"/>
+                                <field name='quantity'/>
+                                <field name='unit_cost'/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Action -->
+        <record id="action_sales_return_expense_entries_view" model="ir.actions.act_window">
+            <field name="name">Sales Return Expense Entries</field>
+            <field name="res_model">sales.return.expense.entries</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new Configuration
+                </p>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report 
+            id="report_customer_tracking"
+            model="customer.tracking.report"
+            string="Customer Tracking Report"
+            report_type="qweb-pdf"
+            name="dsl_service_shop.customer_tracking_report_template"
+            file="dsl_service_shop.customer_tracking_report_template"
+            attachment_use="False"
+        />
+        <template id="customer_tracking_report_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-size: 10px;">
+                        <!-- Report Title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="text-center">Customer Tracking</h2>
+                                <h5 class="text-center" style="padding: 0 !important; margin: 5px !important; font-weight: normal;">
+                                    <t t-set='variable' t-value='True'/>
+                                    <span t-foreach="docs" t-as="line">
+                                        <t t-if='variable'>
+                                            <b>
+                                                <span t-field="line.search_start_date" t-field-options='{"format": "dd/MM/yyyy"}' />
+                                            </b>
+                                            To
+                                            <b>
+                                                <span t-field="line.search_end_date" t-field-options='{"format": "dd/MM/yyyy"}' />
+                                            </b>
+                                            <t t-set='variable' t-value='False'/>
+                                        </t>
+                                    </span>
+                                </h5>
+                            </div>
+                        </div>
+                        <!-- <div class="col-xs-6" style="margin-top:2%; margin-left:5%; text-align:center;">
+                       
+                            <table class="table border table-striped">
+                                <tbody>
+                                    <tr t-foreach="docs" t-as="line">
+                                        <td><strong>Date</strong></td><td>&#160;:&#160;</td>
+                                        <td><strong>&#160;<span t-esc="line.date"/></strong></td>
+                                        <td><strong>Employee&#160;</strong></td><td>&#160;:&#160;</td>
+                                        <td>&#160;<span t-esc="line.employee_id.name"/></td>
+                                    </tr>
+                                    <tr t-foreach="docs" t-as="line">
+                                        <td style="margin-right:10%;"><strong>Purchase Product&#160;</strong></td><td>&#160;:&#160;</td>
+                                        <td>&#160;<span t-esc="line.gift_product_id.name"/></td>
+                                        <td style="margin-right:10%;"><strong>Branch&#160;</strong></td><td>&#160;:&#160;</td>
+                                        <td>&#160;<span t-esc="line.branch_id.name"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> -->
+                        <!-- Report Content -->
+                        <table class="table table-condensed" style="margin-top: 50px !important;">
+                            <thead>
+                                <tr>
+                                    <th>Service Number</th>
+                                    <th>Customer Name</th>
+                                    <th>Contact Number</th>
+                                    <th>Watch Brand</th>
+                                    <th>Watch Model</th>
+                                    <th>Product</th>
+                                    <th>Watch Ref No</th>
+                                    <th class="text-center">Technician</th>
+                                    <th class="text-center">Delivery Date</th>
+                                    <th class="text-right">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="line">
+                                    <td>
+                                        <span t-field="line.name" />
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="line.person_name" />
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="line.contact_no" />
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="line.brand_id" />
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="line.model_id" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.watch_ref_no" />
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="line.product_id" />
+                                    </td>
+                                      <td class="text-center">
+                                        <span t-field="line.technician" />
+                                    </td>
+                                      <td class="text-center">
+                                        <span t-field="line.delivery_date" />
+                                    </td>
+                                      <td class="text-center">
+                                        <span t-field="line.state" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

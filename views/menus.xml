@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_sales_return_root"
+            name="Sales Return" web_icon="dsl_sales_return,static/description/icon.png"/>
+        
+        <menuitem id="menu_sales_return"
+            name="Sales Return"
+            action="action_sales_return_view"
+            parent="menu_sales_return_root"
+            sequence="0001"/>
+            
+        <menuitem id="menu_sales_return_expense_entries"
+            name="Sales Return Expense Entries"
+            action="action_sales_return_expense_entries_view"
+            parent="menu_sales_return_root"
+            sequence="0002"/>
+
+        <menuitem id="menu_sales_return_configuration"
+            name="Configuration"
+            parent="menu_sales_return_root"
+            sequence="0003"/>
+
+        <menuitem id="menu_sales_return_configuration_complain_type"
+            name="Complain Type"
+            action="action_sales_return_complain_type_view"
+            parent="menu_sales_return_configuration"
+            sequence="00031"/>
+
+        <menuitem id="menu_sales_return_configuration_stages"
+            name="Stage"
+            action="action_sales_return_stage_view"
+            parent="menu_sales_return_configuration"
+            sequence="00032"/>
+        
+    </data>
+</odoo>

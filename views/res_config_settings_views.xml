@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_form_view_inherit_sr" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sr</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="70"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="////div[@data-key='account']" position="inside">
+                <div class="external_settings_block" data-string="externalSettings" string="External Settings" data-key="external_settings" groups="account.group_account_manager">
+                    <h2>Sales Return Setup</h2>
+                    <div class="row mt16 o_settings_container" name="discount_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_discount_setting_container">
+                            <separator string="Sales Return Setup"/>
+                            <div class="o_setting_right_pane">
+                                <label for="sr_expense_account_id"/>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sr_expense_account_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="sr_payable_account_id"/>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sr_payable_account_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="default_discount_setting_container">
+                            <separator string="Journal"/>
+                            <div class="o_setting_right_pane">
+                                <label for="sr_payment_journal_id"/>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sr_payment_journal_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="sr_expense_journal_id"/>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="sr_expense_journal_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

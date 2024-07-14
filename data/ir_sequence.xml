@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+<!-- 
+        <record model="ir.sequence" id="sales_return_code_sequence">
+            <field name="name">Sales Return</field>
+            <field name="code">sales.return</field>
+            <field name="implementation">standard</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">SR-</field>
+            <field name="suffix"></field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">0</field>
+        </record> -->
+
+        <record model="ir.sequence" id="sales_return_code_sequence">
+            <field name="name">Sales Return</field>
+            <field name="code">sales.return</field>
+            <field name="prefix">SR-</field>
+            <field name="padding" eval="5"/>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record model="ir.sequence" id="sales_scrap_code_sequence">
+            <field name="name">Sales Scrap</field>
+            <field name="code">sales.scrap</field>
+            <field name="implementation">standard</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">SS-</field>
+            <field name="suffix"></field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">0</field>
+        </record>
+
+        <record model="ir.sequence" id="sales_return_expense_entries_code_sequence">
+            <field name="name">Sales Return Expense Entries</field>
+            <field name="code">sales.return.expense.entries</field>
+            <field name="implementation">standard</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">SREE-</field>
+            <field name="suffix"></field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">0</field>
+        </record>
+        
+        
+    </data>
+</odoo>

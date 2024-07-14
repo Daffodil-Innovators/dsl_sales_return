@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sales_return,sales.return,model_sales_return,base.group_user,1,1,1,1
+access_sales_return_history,sales.return.history,model_sales_return_history,base.group_user,1,1,1,1
+access_sales_return_stage,sales.return.stage,model_sales_return_stage,base.group_user,1,1,1,1
+access_sales_return_complain,sales.return.complain,model_sales_return_complain,base.group_user,1,1,1,1
+access_sales_return_complain_type,sales.return.complain.type,model_sales_return_complain_type,base.group_user,1,1,1,1
+access_sales_return_description,sales.return.description,model_sales_return_description,base.group_user,1,1,1,1
+access_sales_return_complain_tree,sales.return.complain.tree,model_sales_return_complain_tree,base.group_user,1,1,1,1
+access_sales_return_expense_entries,sales.return.expense.entries,model_sales_return_expense_entries,base.group_user,1,1,1,1
+access_sales_return_expense_entries_line,sales.return.expense.entries.line,model_sales_return_expense_entries_line,base.group_user,1,1,1,1
+access_multi_sales_return_expense_entries_line,multi.sales.return.expense.entries.line,model_multi_sales_return_expense_entries_line,base.group_user,1,1,1,1
+access_product_adjustment_line,product.adjustment.line,model_product_adjustment_line,base.group_user,1,1,1,1
+access_delivery_location,delivery.location,model_delivery_location,base.group_user,1,1,1,1
